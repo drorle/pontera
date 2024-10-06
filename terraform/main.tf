@@ -4,20 +4,8 @@ module "app_deployment" {
   region = "us-east-1"
   apps   = [
     {
-      name        = "example-app"
-      deploy_type = "EC2"
       subnets     = [aws_subnet.my_subnet.id]
       security_groups = []
-      ami         = "ami-1"
-      instance_type = "t3.micro"
-      volume_size = 20
-      user_data   = <<-EOF
-                    #!/bin/bash
-                    echo "Hello, World!" > index.html
-                    nohup python -m SimpleHTTPServer 80 &
-                    EOF
-      iam_role    = "example-role"
-      asg         = null
       sg_rules    = [
         {
           type        = "ingress"
