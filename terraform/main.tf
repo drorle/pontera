@@ -5,17 +5,6 @@ module "app_deployment" {
   apps   = [
     {
       subnets     = [aws_subnet.my_subnet.id]
-      security_groups = []
-      sg_rules    = [
-        {
-          type        = "ingress"
-          protocol    = "tcp"
-          from_port   = 80
-          to_port     = 80
-          cidr_blocks = ["0.0.0.0/0"]
-          description = "Allow HTTP"
-        }
-      ]
       alb         = {
         deploy      = false
         subnets     = []

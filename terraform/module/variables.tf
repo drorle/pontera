@@ -22,39 +22,48 @@ variable "apps" {
     subnets          = list(string)
     security_groups  = optional(list(string),[])
     ami              = optional(string, "ami-0cff7528ff583bf9a")
-    instance_type    = optional(string, "t3.micro")
+    instance_type    = optional(string, "t2.micro")
     volume_size      = optional(number, 20)
     user_data        = optional(string, "")
     iam_role         = optional(string,"")
     asg = optional(object({
-      min     = number
-      max     = number
-      desired = number
+      min     = optional(number,1)
+      max     = optional(number,3)
+      desired = optional(number,2)
     }),null)
     sg_rules = optional(list(object({
-      type        = string
-      protocol    = string
-      from_port   = number
-      to_port     = number
-      cidr_blocks = list(string)
-      description = string
-    })),null)
-    alb = optional(object({
-      deploy       = bool
+      type        = optional(string, "ingress")
+      protocol    = optional(string, "tcp")
+      from_port   = optional(number,22)
+      to_port     = optional(number,22)
+      cidr_blocks = optional(list(string),[])
+      description = optional(string,"")
+    })),[
+      {
+        type        = "ingress"
+        protocol    = "tcp"
+        from_port   = 22
+        to_port     = 22
+        cidr_blocks = []
+        description = ""
+      }
+    ])
+    alb = object({
+      deploy       = optional(bool,false)
       subnets      = list(string)
-      sg           = string
-      listen_port  = number
-      dest_port    = number
-      host         = string
-      path         = string
-    }),null)
+      sg           = optional(string,null)
+      listen_port  = optional(number,22)
+      dest_port    = optional(number,22)
+      host         = optional(string,"")
+      path         = optional(string,"")
+    })
   }))
   default = [
     {
       name             = "app0"
-      deploy_type      = "EC1"
-      subnets          = ["subnet-12346"]
-      security_groups  = ["sg-12346"]
+      deploy_type      = "EC2"
+      subnets          = []
+      security_groups  = []
       ami              = "ami-1cff7528ff583bf9a"
       instance_type    = "t2.micro"
       volume_size      = 19
