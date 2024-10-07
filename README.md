@@ -10,6 +10,11 @@ The required module under "terraform/module"
 
 Example files under "terraform/" that will deploy the resources
 
+### Notes
+When calling the module you must provide some subnet (see example), otherwise the deployment will fail. 
+
+All the other parameters are optional, although the default values are not always "ideal".
+
 ## kubernetes
 It contains a yaml file with the necessary components for the deployment.
 
