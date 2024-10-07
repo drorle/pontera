@@ -6,9 +6,9 @@ Made of two parts:
 ## terraform
 It contains:
 
-The required module under "terraform/module"
+The required module under "terraform/module".
 
-Example files under "terraform/" that will deploy the resources
+Example files are located under "terraform/". Those are configured to deploy the resources.
 
 ### Notes
 When calling the module you must provide some subnet (see example), otherwise the deployment will fail. 
