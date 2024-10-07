@@ -48,15 +48,25 @@ variable "apps" {
         description = ""
       }
     ])
-    alb = object({
+    alb = optional(object({
       deploy       = optional(bool,false)
-      subnets      = list(string)
+      subnets      = optional(list(string),[])
       sg           = optional(string,null)
       listen_port  = optional(number,22)
       dest_port    = optional(number,22)
       host         = optional(string,"")
       path         = optional(string,"")
-    })
+    }),
+      {
+        deploy = false
+        subnets = []
+        sg = null
+        listen_port = 22
+        dest_port = 22
+        host = ""
+        path = ""
+      }
+    )
   }))
   default = [
     {
