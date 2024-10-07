@@ -4,7 +4,7 @@ module "app_deployment" {
   region = "us-east-1"
   apps   = [
     {
-      deploy_type = "ASG"
+      deploy_type = "EC2"
       subnets     = [aws_subnet.my_subnet.id]
     },
   ]
