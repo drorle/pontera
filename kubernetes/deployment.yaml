@@ -56,5 +56,5 @@ spec:
         command: ["/bin/sh"]
         args: ["-c", "while true; do aws secretsmanager get-secret-value --secret-id my-secret --region us-east-2; sleep 3600; done"]
         env:
-        - name: AWS_DEFAULT_REGION
+        - name: AWS_REGION
           value: us-east-2
