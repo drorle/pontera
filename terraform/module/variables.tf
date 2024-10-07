@@ -30,7 +30,12 @@ variable "apps" {
       min     = optional(number,1)
       max     = optional(number,3)
       desired = optional(number,2)
-    }),null)
+    }),{
+      min = 1
+      max = 3
+      desired = 2
+    }
+    )
     sg_rules = optional(list(object({
       type        = optional(string, "ingress")
       protocol    = optional(string, "tcp")
